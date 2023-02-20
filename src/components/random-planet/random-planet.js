@@ -1,10 +1,60 @@
 import { Component } from "react";
-
+import SWapiservice from "../../swapi-service";
+import './random-planet.css';
 export default class RandomPlanet extends Component{
+    sw = new SWapiservice();
+
+    constructor(){
+        super();
+        this.updatePlanet();
+    }
+    state = {
+        id: null,
+        name: null,
+        population: null,
+        rotationPeriod: null,
+        diameter: null
+    }
+
+    updatePlanet(){
+        const id = Math.floor(Math.random() * 25);
+        this.sw.getPlanet(id).then(data =>{
+            
+            this.setState({
+                id: id,
+                name: data.name,
+                population: data.population,
+                rotationPeriod: data.rotation_period,
+                diameter: data.diameter
+            })
+        })
+    }
+
     render(){
+        const {id, name, population, rotationPeriod, diameter} = this.state;
+        
         return(
-            <div className="random-planet jumbotron">
-                <img className="planet-image"/>
+            <div className="random-planet jumbotron rounded">
+                <img className="planet-image" 
+                src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+                />
+                <div>
+                    <h4>{name}</h4>
+                    <ul className="list-group list-group-flush">
+                        <li className="list-group-item">
+                            <span className="term">Population</span>
+                            <span>{population}</span>
+                        </li>
+                        <li className="list-group-item">
+                            <span className="term">Rotation Period</span>
+                            <span>{rotationPeriod}</span>
+                        </li>
+                        <li className="list-group-item">
+                            <span className="term">Diameter</span>
+                            <span>{diameter}</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         );
     }

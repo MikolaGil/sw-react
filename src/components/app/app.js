@@ -3,6 +3,7 @@ import ItemList from "../item-list/item-list";
 import PersonDetails from "../person-details/person-details";
 import RandomPlanet from "../random-planet/random-planet";
 import Header from "../header/header";
+import "./app.css";
 
 const App = () =>{
     return(
