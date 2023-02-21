@@ -1,5 +1,6 @@
 import { Component } from "react";
 import SWapiservice from "../../swapi-service";
+import Spinner from "../spinner/spinner";
 import './random-planet.css';
 export default class RandomPlanet extends Component{
     sw = new SWapiservice();
@@ -16,17 +17,14 @@ export default class RandomPlanet extends Component{
         diameter: null
     }
 
+    onPlanetLoaded = (data) => {
+        this.setState(data);
+    }
+
     updatePlanet(){
         const id = Math.floor(Math.random() * 25);
         this.sw.getPlanet(id).then(data =>{
-            
-            this.setState({
-                id: id,
-                name: data.name,
-                population: data.population,
-                rotationPeriod: data.rotation_period,
-                diameter: data.diameter
-            })
+            this.onPlanetLoaded(data);
         })
     }
 
@@ -39,6 +37,7 @@ export default class RandomPlanet extends Component{
                 src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
                 />
                 <div>
+                    <Spinner/>
                     <h4>{name}</h4>
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">
