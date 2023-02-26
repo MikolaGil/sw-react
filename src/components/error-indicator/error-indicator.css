@@ -1,0 +1,10 @@
+.error-indicator{
+    margin: auto;
+    width: 300px;
+    color: chocolate;
+}
+
+.error-indicator img{
+    width:64px;
+    height: 64px;
+}

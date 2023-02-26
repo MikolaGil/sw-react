@@ -4,8 +4,8 @@ import "./spinner.css";
 
 export default class Spinner extends Component{
     render(){
-        return <div class="spinner">
-            <div class="ldio">
+        return <div className="spinner">
+            <div className="ldio">
         <div></div>
         </div></div>
     }
