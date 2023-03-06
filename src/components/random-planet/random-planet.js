@@ -10,6 +10,7 @@ export default class RandomPlanet extends Component{
         super();
         this.updatePlanet();
     }
+    
     state = {
         id: null,
         name: null,
@@ -20,17 +21,25 @@ export default class RandomPlanet extends Component{
         error: false
     }
 
+    componentDidMount(){
+        this.interval = setInterval(this.updatePlanet, 5000);
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.interval);
+    }
+
     onPlanetLoaded = (data) => {
         data.loading = false;
         this.setState(data);
     }
-
+    
     onError = (err) =>{
         this.setState({error: true, loading: false});
     }
 
-    updatePlanet(){
-        const id = Math.floor(Math.random() * 15) + 1;
+    updatePlanet =() =>{
+        const id = Math.floor(Math.random() * 15) + 3;
         this.sw.getPlanet(id)
             .then((data) => this.onPlanetLoaded(data))
             .catch(this.onError)

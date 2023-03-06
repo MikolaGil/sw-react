@@ -45,7 +45,7 @@ export default class SWapiservice{
       return this._transformStarship(starship);
     }
 
-    transformPlanet(data){
+    transformPlanet = (data) => {
       return {
           id: this.extractId(data, "url"),
           name: data.name,
@@ -55,7 +55,7 @@ export default class SWapiservice{
       }
     }
 
-    _transformStarship(starship){
+    _transformStarship = (starship) =>{
       return{
         id: this.extractId(starship, "url"),
         name: starship.name,
@@ -69,7 +69,7 @@ export default class SWapiservice{
       }
     }
 
-    _tranformPerson(person){
+    _tranformPerson=(person) =>{
       return{
         id: this.extractId(person, "url"),
         name: person.name,
